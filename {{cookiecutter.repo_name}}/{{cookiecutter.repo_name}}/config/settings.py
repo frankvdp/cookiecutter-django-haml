@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Django settings for {{cookiecutter.project_name}} project.
+Django settings for project_name project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/dev/topics/settings/
@@ -104,7 +104,7 @@ class Common(Configuration):
     ########## MANAGER CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
     ADMINS = (
-        ('{{cookiecutter.author_name}}', '{{cookiecutter.email}}'),
+        ('Your Name', 'Your email'),
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
@@ -113,7 +113,7 @@ class Common(Configuration):
 
     ########## DATABASE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-    DATABASES = values.DatabaseURLValue('postgres://localhost/{{cookiecutter.repo_name}}')
+    DATABASES = values.DatabaseURLValue('postgres://localhost/repo_name')
     ########## END DATABASE CONFIGURATION
 
     ########## CACHING
@@ -129,10 +129,10 @@ class Common(Configuration):
 
     ########## GENERAL CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
-    TIME_ZONE = 'America/Los_Angeles'
+    TIME_ZONE = 'Europe/Amsterdam'
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-    LANGUAGE_CODE = 'en-us'
+    LANGUAGE_CODE = 'nl-NL'
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
     SITE_ID = 1
@@ -144,7 +144,7 @@ class Common(Configuration):
     USE_L10N = True
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
-    USE_TZ = True
+    USE_TZ = False
     ########## END GENERAL CONFIGURATION
 
     ########## TEMPLATE CONFIGURATION
@@ -171,8 +171,8 @@ class Common(Configuration):
     TEMPLATE_LOADERS = (
             'hamlpy.template.loaders.HamlPyFilesystemLoader',
             'hamlpy.template.loaders.HamlPyAppDirectoriesLoader',
-            'django.template.loaders.filesystem.Loader',
             'django.template.loaders.app_directories.Loader',
+            'django.template.loaders.filesystem.Loader',
         )
 
     # See: http://django-crispy-forms.readthedocs.org/en/latest/install.html#template-packs
@@ -259,13 +259,17 @@ class Local(Common):
     ########## END INSTALLED_APPS
 
     ########## Mail settings
-    EMAIL_HOST = "localhost"
-    EMAIL_PORT = 1025
+    # EMAIL_HOST = "localhost"
+    # EMAIL_PORT = 1025
+    EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
     ########## End mail settings
 
     ########## django-debug-toolbar
     MIDDLEWARE_CLASSES = Common.MIDDLEWARE_CLASSES + ('debug_toolbar.middleware.DebugToolbarMiddleware',)
     INSTALLED_APPS += ('debug_toolbar',)
+
+    # Adding gunicorn for local foreman
+    INSTALLED_APPS += ('gunicorn',)
 
     INTERNAL_IPS = ('127.0.0.1',)
 
@@ -358,13 +362,13 @@ class Production(Common):
 
     ########## EMAIL
     DEFAULT_FROM_EMAIL = values.Value(
-            '{{cookiecutter.project_name}} <{{cookiecutter.project_name}}-noreply@{{cookiecutter.domain_name}}>')
+            'project_name <project_name-noreply@example.com>')
     EMAIL_BACKEND = values.Value('django.core.mail.backends.smtp.EmailBackend')
     EMAIL_HOST = values.Value('smtp.sendgrid.com')
     EMAIL_HOST_PASSWORD = values.SecretValue(environ_prefix="", environ_name="SENDGRID_PASSWORD")
     EMAIL_HOST_USER = values.SecretValue(environ_prefix="", environ_name="SENDGRID_USERNAME")
     EMAIL_PORT = values.IntegerValue(587, environ_prefix="", environ_name="EMAIL_PORT")
-    EMAIL_SUBJECT_PREFIX = values.Value('[{{cookiecutter.project_name}}] ', environ_name="EMAIL_SUBJECT_PREFIX")
+    EMAIL_SUBJECT_PREFIX = values.Value('[project_name] ', environ_name="EMAIL_SUBJECT_PREFIX")
     EMAIL_USE_TLS = True
     SERVER_EMAIL = EMAIL_HOST_USER
     ########## END EMAIL
@@ -386,4 +390,3 @@ class Production(Common):
     ########## END CACHING
 
     ########## Your production stuff: Below this line define 3rd party libary settings
-
