@@ -1,4 +1,4 @@
-{% raw %}
+
 - load staticfiles i18n
 !!!
 // TODO: find the right way for implementing ng-app to html using hamlpy
@@ -34,29 +34,37 @@
       %script{src: "//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"}
 
   %body
-    .header.navbar
+    %nav.header.navbar.navbar-default{role: "navigation"}
       .container
-        %a.navbar-brand{href: "/"}
-          {{cookiecutter.repo_name}}
-        %ul.nav.navbar-nav
-          %li.active
-            %a{href: "{% url 'home' %}"} Home
-          %li
-            %a{href: "{% url 'about' %}"} About
-          - if request.user.is_authenticated
+        / Brand and toggle get grouped for better mobile display
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-ex1-collapse", "data-toggle" => "collapse", type: "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{href: "#"} {{cookiecutter.repo_name}}
+        / Collect the nav links, forms, and other content for toggling
+        .collapse.navbar-collapse.navbar-ex1-collapse
+          %ul.nav.navbar-nav
+            %li.active
+              %a{href: "{% url 'home' %}"} Home
             %li
-              %a{href: "{% url 'users:detail' request.user.username  %}"} 
-                {% trans "My Profile" %}
-            %li
-              %a{href: "{% url 'account_logout' %}"} 
-                {% trans "Logout" %}
-            {% else %}
-            %li
-              %a{href: "{% url 'account_signup' %}"} 
-                {% trans "Sign Up" %}
-            %li
-              %a{href: "{% url 'account_login' %}"} 
-                {% trans "Log In" %}
+              %a{href: "{% url 'about' %}"} About
+            - if request.user.is_authenticated
+              %li
+                %a{href: "{% url 'users:detail' request.user.username  %}"} 
+                  {% trans "My Profile" %}
+              %li
+                %a{href: "{% url 'account_logout' %}"} 
+                  {% trans "Logout" %}
+              {% else %}
+              %li
+                %a{href: "{% url 'account_signup' %}"} 
+                  {% trans "Sign Up" %}
+              %li
+                %a{href: "{% url 'account_login' %}"} 
+                  {% trans "Log In" %}
 
 
 
@@ -78,4 +86,3 @@
       / place project specific Javascript in this file
       %script{src: "{% static 'js/project.js' %}"}
 </html>
-{% endraw %}
