@@ -17,6 +17,8 @@ Features
 * Procfile for deploying to Heroku
 * Heroku optimized requirements
 * Basic caching setup
+* Hamlpy for rendering html
+
 
 Constraints
 -----------
