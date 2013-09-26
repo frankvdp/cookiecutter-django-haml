@@ -1,9 +1,10 @@
-cookiecutter-django
+cookiecutter-django-haml
 =======================
 
-A cookiecutter_ template for Django.
+A cookiecutter_ template for Django, based on pydanny's cookiecutter-django_.
 
 .. _cookiecutter: https://github.com/audreyr/cookiecutter
+.. _cookiecutter-django: https://github.com/pydanny/cookiecutter-django
 
 Features
 ---------
