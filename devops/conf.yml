@@ -1,0 +1,5 @@
+---
+app_name: {{cookiecutter.project_name}}
+dbname: {{cookiecutter.db_name}}
+dbuser: {{cookiecutter.db_user}}
+dbpassword: {{cookiecutter.db_password}}

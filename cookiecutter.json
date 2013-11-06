@@ -1,6 +1,9 @@
 {
     "project_name": "project_name",
     "repo_name":"repo_name",
+    "db_user":"vagrant",
+    "db_name":"vagrant",
+    "db_password":"vagrant",
     "author_name": "Your Name",
     "email": "Your email",
     "description": "A short description of the project.",
