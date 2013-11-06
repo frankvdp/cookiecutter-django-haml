@@ -20,10 +20,10 @@
 
   tasks:
   - name: ensure database is created
-    action: postgresql_db db={{dbname}}
+    action: postgresql_db db={% raw %}{{dbname}}{% endraw %}
 
   - name: ensure user has access to database
-    action: postgresql_user db={{dbname}} user={{dbuser}} password={{dbpassword}} priv=ALL
+    action: postgresql_user db={% raw %}{{dbname}}{% endraw %} user={% raw %}{{dbuser}}{% endraw %} password={% raw %}{{dbpassword}}{% endraw %} priv=ALL
 
   - name: ensure user does not have unnecessary privilege
-    action: postgresql_user user={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+    action: postgresql_user user={% raw %}{{dbuser}}{% endraw %} role_attr_flags=NOSUPERUSER,NOCREATEDB

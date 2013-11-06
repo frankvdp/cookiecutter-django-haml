@@ -13,15 +13,15 @@ server {
 
     client_max_body_size 4G;
 
-    access_log /vagrant/{{app_name}}/logs/nginx-access.log;
-    error_log /vagrant/{{app_name}}/logs/nginx-error.log;
+    access_log /vagrant/{% raw %}{{app_name}}{% endraw %}/logs/nginx-access.log;
+    error_log /vagrant/{% raw %}{{app_name}}{% endraw %}/logs/nginx-error.log;
 
     location /static/ {
-        alias   /vagrant/{{app_name}}/static/;
+        alias   /vagrant/{% raw %}{{app_name}}{% endraw %}/static/;
     }
 
     location /media/ {
-        alias   /vagrant/{{app_name}}/media/;
+        alias   /vagrant/{% raw %}{{app_name}}{% endraw %}/media/;
     }
 
     location / {

@@ -9,7 +9,7 @@
 # Install Python && Django packages
 
 - name: Install dev pkgs
-  apt: pkg={{ item }}
+  apt: pkg={% raw %}{{ item }}{% endraw %}
   with_items:
     - build-essential
     - python-dev
@@ -25,7 +25,7 @@
     - memcached
 
 - name: pip install stuff
-  pip: name={{ item }}
+  pip: name={% raw %}{{ item }}{% endraw %}
   with_items:
     - distribute
     - virtualenv
